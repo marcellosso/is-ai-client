@@ -1,5 +1,63 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Todo
+
+##### Priorities
+
+- [ ] Add integration with local storage
+- [ ] Save High score on local storage
+- [ ] Retrieve high score on local storage
+- [ ] Method to retrieve random level from levels array
+- [ ] Store played levels, if we draw a level that has been played, draw again
+- [ ] Analyze: Instead of storing the played level (we also need to store the answer to send to the backend), store its index on the levels array and make it impossible to draw that index
+
+- [ ] Handle proper development (local) and production enviromnents
+- [ ] Prepare for production release
+
+- [ ] Potential: 'About' and 'Help' modal
+
+## In Progress
+
+- [ ] Handle game logic
+- [ ] Replace Context with game hook
+- [ ] Move API logic API handler
+
+## Done ✓
+
+- [x] Setup project and dependencies
+- [x] Setup tailwind with next
+- [x] Setup eslint and prettier with next
+- [x] Setup husky with lint-staged pre-commit hook
+- [x] Setup local environments
+- [x] Create initial file setup and color palette
+- [x] Create connection with backend api
+
+---
+
+## Functionality:
+
+### Start:
+
+'Play Game' button at middle of the screen at the start
+
+### When Playing:
+
+Show random image with 2 buttons underneath 'HUMAN (human icon)' & 'AI (robot icon)'
+If the player gets correct, go to next level.
+If the player gets incorrect, end game and show high score with 'play again button'
+After each answer show a small graph with the percentage of answered options from all players
+
+### How to:
+
+have a isPlaying state to keep track of wether to show the game or not
+have a gameFinished state to know when to display the play again button and end game information (time spent? avg time per pic?)
+
+keep track of answers on backend to have add a graph later on
+
+{index: 1, answered: IA}
+
+---
+
 ## Getting Started
 
 First, run the development server:
