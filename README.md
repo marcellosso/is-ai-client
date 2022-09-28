@@ -4,23 +4,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ##### Priorities
 
-- [ ] Add integration with local storage
-- [ ] Save High score on local storage
-- [ ] Retrieve high score on local storage
-- [ ] Method to retrieve random level from levels array
-- [ ] Store played levels, if we draw a level that has been played, draw again
-- [ ] Analyze: Instead of storing the played level (we also need to store the answer to send to the backend), store its index on the levels array and make it impossible to draw that index
-
 - [ ] Handle proper development (local) and production enviromnents
 - [ ] Prepare for production release
 
-- [ ] Potential: 'About' and 'Help' modal
+- [ ] Add Styles
 
 ## In Progress
 
-- [ ] Handle game logic
-- [ ] Replace Context with game hook
-- [ ] Move API logic API handler
+- [ ] Potential: 'About' and 'Help' modal
+- [ ] Add info toast on layout
 
 ## Done ✓
 
@@ -31,6 +23,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [x] Setup local environments
 - [x] Create initial file setup and color palette
 - [x] Create connection with backend api
+- [x] Handle game logic
+- [x] Replace Context with game hook
+- [x] Move API logic API handler
+- [x] Method to retrieve random level from levels array
+- [x] Save High score on cookies
+- [x] Retrieve high score from cookies
+- [x] Store played levels, if we draw a level that has been played, draw again
+- [x] Analyze: Instead of storing the played level (we also need to store the answer to send to the backend), store its index on the levels array and make it impossible to draw that index
 
 ---
 
