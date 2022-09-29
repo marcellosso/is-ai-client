@@ -11,8 +11,9 @@ interface IGame {
 }
 
 const game: FC<IGame> = ({ currentLevel, currentScore, handleAnswer }) => {
+  const condition = true;
   return (
-    <div>
+    <div className={!condition ? 'h-full' : ''}>
       {process.env.NODE_ENV == 'development' && (
         <div className="flex justify-center items-center">
           <h1>{currentLevel.type}</h1>
@@ -23,6 +24,7 @@ const game: FC<IGame> = ({ currentLevel, currentScore, handleAnswer }) => {
         alt="img"
         width={520}
         height={520}
+        // height={!condition ? 450 : 520}
       />
       <div className="flex justify-between items-center mt-2">
         <button
@@ -32,7 +34,9 @@ const game: FC<IGame> = ({ currentLevel, currentScore, handleAnswer }) => {
         >
           <span className="pr-2">Human</span> <BsPersonFill />
         </button>
-        <h1 className="font-bold text-detail text-2xl">{currentScore}</h1>
+        <h1 className="font-bold text-detail text-2xl sm:text-4xl">
+          {currentScore}
+        </h1>
         <button
           type="button"
           className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"

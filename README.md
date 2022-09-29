@@ -2,17 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Todo
 
+- [ ] Add google analytics
+
 ##### Priorities
 
 - [ ] Handle proper development (local) and production enviromnents
 - [ ] Prepare for production release
 
-- [ ] Add Styles
-
 ## In Progress
 
 - [ ] Potential: 'About' and 'Help' modal
+- [ ] Add Styles
 - [ ] Add info toast on layout
+- [ ] Bar chart after question
 
 ## Done ✓
 
