@@ -35,7 +35,7 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
         <Game
           currentScore={currentScore}
           currentLevel={currentLevel}
-          handleAnswer={handleAnswer}
+          handleGameAnswer={handleAnswer}
         />
       )}
     </Layout>
