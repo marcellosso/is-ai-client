@@ -12,6 +12,7 @@ const Layout: React.FC<ILayout> = ({ children }) => {
           AI OR HUMAN?
         </h1>
       </header>
+
       <div className="h-full flex items-center justify-center">{children}</div>
     </div>
   );
