@@ -8,13 +8,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - [ ] Handle proper development (local) and production enviromnents
 - [ ] Prepare for production release
+- [ ] Add summary page after game ended, show if got high score and show all questions that were answered with the source and desc
+- [ ] Bar chart on summary
 
 ## In Progress
 
 - [ ] Potential: 'About' and 'Help' modal
 - [ ] Add Styles
 - [ ] Add info toast on layout
-- [ ] Bar chart after question
 
 ## Done ✓
 

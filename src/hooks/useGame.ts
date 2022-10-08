@@ -1,5 +1,6 @@
 import { setCookie } from 'cookies-next';
 import { useState } from 'react';
+import { updateLevelsAnswers } from '../services/level';
 import { Level, LEVEL_TYPE_ENUM, PreviousAnswerLevel } from '../types/level';
 
 const LIMIT_LEVEL_AMOUNT = process.env.NEXT_PUBLIC_LIMIT_LEVEL_AMOUNT || 5;
@@ -48,12 +49,17 @@ const useGame = (levels: Level[], highestScoreCookie: number) => {
     setHighestScoreClientState(currentScore);
   };
 
+  const updateAnswers = () => {
+    setPreviousAnswers([]);
+    updateLevelsAnswers(previousAnswers);
+  };
+
   const endGame = () => {
     if (currentScore > highestScoreCookie) updateHighScore();
     setCurrentScore(0);
     setGameStarted(false);
-    setPreviousAnswers([]);
-    console.log(previousAnswers);
+
+    updateAnswers();
     setCurrentLevel(getRandomLevel());
   };
 
