@@ -14,12 +14,6 @@ interface IGame {
 const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
   return (
     <div>
-      {process.env.NODE_ENV == 'development' && (
-        <div className="flex justify-center items-center">
-          <h1>{currentLevel.type}</h1>
-        </div>
-      )}
-
       <Image
         src={`${process.env.NEXT_PUBLIC_API_URL}${currentLevel.imageName}`}
         alt="img"
