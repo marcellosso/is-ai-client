@@ -8,6 +8,7 @@ import Layout from '../components/layout';
 import StartGame from '../components/start-game';
 import Game from '../components/game';
 import { getCookie } from 'cookies-next';
+import { Alert } from '../types/alert';
 
 interface IMain {
   levels: Level[];
@@ -16,6 +17,8 @@ interface IMain {
 
 const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
   const {
+    alert,
+    setAlert,
     gameStarted,
     setGameStarted,
     currentScore,
@@ -25,7 +28,7 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
   } = useGame(levels, highestScoreCookie);
 
   return (
-    <Layout>
+    <Layout alert={alert as Alert} setAlert={setAlert}>
       {!gameStarted ? (
         <StartGame
           highestScore={highestScoreClientState}
