@@ -22,7 +22,6 @@ export const updateLevelsAnswers = async (
   try {
     await api.post(`${LEVEL_ENDPOINT}/answers`, answers);
   } catch (err) {
-    console.log(err);
     setAlert({ severity: ALERT_SEVERITY.ERROR, message: err as string });
   }
 };
