@@ -22,7 +22,6 @@ export const handleAuthSSR = async (ctx: GetServerSidePropsContext) => {
 
   try {
     if (!authtoken) {
-      await logout();
       return redirectOnError();
     }
     const validateResponseData = await validateAuth(authtoken);
