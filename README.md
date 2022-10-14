@@ -2,18 +2,18 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Todo
 
-- [ ] Add google analytics
 - [ ] Bar chart on summary
 
 ##### Priorities
 
-- [ ] Handle proper development (local) and production enviromnents
-- [ ] Prepare for production release
+- [ ] Add summary page after game ended, show if got high score and show all questions that were answered with the source and desc
 
 ## In Progress
 
-- [ ] Add summary page after game ended, show if got high score and show all questions that were answered with the source and desc
-- [ ] Fix CORS
+- [ ] Add google analytics
+- [ ] Add ADMIN Page
+- [ ] Handle proper development (local) and production enviromnents
+- [ ] Prepare for production release
 
 ## Done ✓
 
@@ -33,7 +33,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [x] Store played levels, if we draw a level that has been played, draw again
 - [x] Analyze: Instead of storing the played level (we also need to store the answer to send to the backend), store its index on the levels array and make it impossible to draw that index
 - [x] Add Styles
-- [x] Add info toast on layouT
+- [x] Add info toast on layout
+- [x] Fix CORS
 
 ---
 

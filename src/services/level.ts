@@ -1,4 +1,3 @@
-import { Alert, ALERT_SEVERITY } from '../types/alert';
 import { PreviousAnswerLevel } from '../types/level';
 import api from './api';
 
@@ -15,13 +14,10 @@ export const getAllLevels = async () => {
   }
 };
 
-export const updateLevelsAnswers = async (
-  answers: PreviousAnswerLevel[],
-  setAlert: (_a: Alert) => void
-) => {
+export const updateLevelsAnswers = async (answers: PreviousAnswerLevel[]) => {
   try {
-    await api.post(`${LEVEL_ENDPOINT}/answers`, answers);
+    await api.post(`${LEVEL_ENDPOINT}/answers/`, answers);
   } catch (err) {
-    setAlert({ severity: ALERT_SEVERITY.ERROR, message: err as string });
+    console.log(err);
   }
 };

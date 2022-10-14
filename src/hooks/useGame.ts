@@ -1,6 +1,6 @@
 import { setCookie } from 'cookies-next';
-import { useState } from 'react';
-import { updateLevelsAnswers } from '../services/level';
+import React, { useState } from 'react';
+import { getAllLevels, updateLevelsAnswers } from '../services/level';
 import { Alert } from '../types/alert';
 import { Level, LEVEL_TYPE_ENUM, PreviousAnswerLevel } from '../types/level';
 
@@ -51,9 +51,17 @@ const useGame = (levels: Level[], highestScoreCookie: number) => {
     setHighestScoreClientState(currentScore);
   };
 
+  React.useEffect(() => {
+    const test = async () => {
+      await getAllLevels();
+    };
+
+    test();
+  }, []);
+
   const updateAnswers = () => {
     setPreviousAnswers([]);
-    updateLevelsAnswers(previousAnswers, setAlert);
+    updateLevelsAnswers(previousAnswers);
   };
 
   const endGame = () => {

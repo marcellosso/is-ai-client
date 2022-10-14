@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Alert } from '../../types/alert';
+import { Alert, ALERT_SEVERITY } from '../../types/alert';
 
 interface IAlert {
   alert: Alert;
@@ -7,15 +7,21 @@ interface IAlert {
 }
 
 const Alert: FC<IAlert> = ({ alert, setAlert }) => {
+  const getAlertColor = () => {
+    if (alert.severity == ALERT_SEVERITY.WARNING) return 'yellow';
+    if (alert.severity == ALERT_SEVERITY.ERROR) return 'red';
+    return 'blue';
+  };
+
   return (
     <div
       id="alert-1"
-      className={`flex p-4 mb-4 bg-${alert.severity}-100 rounded-lg dark:bg-${alert.severity}-200`}
+      className={`flex p-4 mb-4 bg-${getAlertColor()}-100 rounded-lg dark:bg-${getAlertColor()}-200`}
       role="alert"
     >
       <svg
         aria-hidden="true"
-        className={`flex-shrink-0 w-5 h-5 text-${alert.severity}-700 dark:text-${alert.severity}-800`}
+        className={`flex-shrink-0 w-5 h-5 text-${getAlertColor()}-700 dark:text-${getAlertColor()}-800`}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -28,13 +34,13 @@ const Alert: FC<IAlert> = ({ alert, setAlert }) => {
       </svg>
       <span className="sr-only">Info</span>
       <div
-        className={`ml-3 text-sm font-medium text-${alert.severity}-700 dark:text-${alert.severity}-800`}
+        className={`ml-3 text-sm font-medium text-${getAlertColor()}-700 dark:text-${getAlertColor()}-800`}
       >
         {alert.message}
       </div>
       <button
         type="button"
-        className={`ml-auto -mx-1.5 -my-1.5 bg-${alert.severity}-100 text-${alert.severity}-500 rounded-lg focus:ring-2 focus:ring-${alert.severity}-400 p-1.5 hover:bg-${alert.severity}-200 inline-flex h-8 w-8 dark:bg-${alert.severity}-200 dark:text-${alert.severity}-600 dark:hover:bg-${alert.severity}-300`}
+        className={`ml-auto -mx-1.5 -my-1.5 bg-${getAlertColor()}-100 text-${getAlertColor()}-500 rounded-lg focus:ring-2 focus:ring-${getAlertColor()}-400 p-1.5 hover:bg-${getAlertColor()}-200 inline-flex h-8 w-8 dark:bg-${getAlertColor()}-200 dark:text-${getAlertColor()}-600 dark:hover:bg-${getAlertColor()}-300`}
         onClick={() => setAlert({})}
         data-dismiss-target="#alert-1"
         aria-label="Close"
@@ -43,7 +49,7 @@ const Alert: FC<IAlert> = ({ alert, setAlert }) => {
         <svg
           aria-hidden="true"
           className="w-5 h-5"
-          fill={alert.severity}
+          fill={getAlertColor()}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
