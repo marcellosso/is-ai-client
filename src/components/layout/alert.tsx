@@ -8,8 +8,8 @@ interface IAlert {
 
 const Alert: FC<IAlert> = ({ alert, setAlert }) => {
   const getAlertColor = () => {
-    if (alert.severity == ALERT_SEVERITY.WARNING) return 'yellow';
-    if (alert.severity == ALERT_SEVERITY.ERROR) return 'red';
+    if (alert?.severity == ALERT_SEVERITY.WARNING) return 'yellow';
+    if (alert?.severity == ALERT_SEVERITY.ERROR) return 'red';
     return 'blue';
   };
 

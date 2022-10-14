@@ -4,7 +4,7 @@ import { Alert } from '../../types/alert';
 import AlertComponent from './alert';
 
 interface IContent {
-  alert: Alert;
+  alert?: Alert;
   setAlert: (_v: Alert) => void;
   children: React.ReactElement | React.ReactElement[];
 }
@@ -12,7 +12,7 @@ interface IContent {
 const Content: FC<IContent> = ({ alert, setAlert, children }) => {
   return (
     <div className="fixed left-0 right-0 z-30 flex flex-col items-center w-screen h-screen text-letter overflow-scroll overflow-x-hidden">
-      {alert.message && <AlertComponent alert={alert} setAlert={setAlert} />}
+      {alert?.message && <AlertComponent alert={alert} setAlert={setAlert} />}
 
       <header className="flex items-center justify-center w-full">
         <Image

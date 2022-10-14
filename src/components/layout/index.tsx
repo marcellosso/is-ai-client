@@ -3,8 +3,8 @@ import { Alert } from '../../types/alert';
 import Content from './content';
 
 interface ILayout {
-  alert: Alert;
-  setAlert: (_v: Alert) => void;
+  alert?: Alert;
+  setAlert?: (_v: Alert) => void;
   children: React.ReactElement | React.ReactElement[];
 }
 
@@ -16,7 +16,7 @@ const Layout: React.FC<ILayout> = ({ alert, setAlert, children }) => {
       {/* Backgroung Image Filter */}
       <div className="h-screen w-screen fixed left-0 right-0 z-20 block bg-primaryTransparent" />
       {/* Content */}
-      <Content alert={alert} setAlert={setAlert}>
+      <Content alert={alert} setAlert={setAlert as (_v: Alert) => void}>
         {children}
       </Content>
     </>
