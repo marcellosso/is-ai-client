@@ -51,9 +51,9 @@ const useGame = (levels: Level[], highestScoreCookie: number) => {
     setHighestScoreClientState(currentScore);
   };
 
-  const updateAnswers = () => {
+  const updateAnswers = (newPrevAnswers: PreviousAnswerLevel[]) => {
     setPreviousAnswers([]);
-    updateLevelsAnswers(previousAnswers);
+    updateLevelsAnswers(newPrevAnswers);
   };
 
   const endGame = () => {
@@ -61,7 +61,17 @@ const useGame = (levels: Level[], highestScoreCookie: number) => {
     setCurrentScore(0);
     setGameStarted(false);
 
-    updateAnswers();
+    const newPreviousAnswers = [...previousAnswers];
+
+    newPreviousAnswers.push({
+      levelId: currentLevel._id as string,
+      answer:
+        currentLevel.type == LEVEL_TYPE_ENUM.HUMAN
+          ? LEVEL_TYPE_ENUM.AI
+          : LEVEL_TYPE_ENUM.HUMAN,
+    });
+
+    updateAnswers(newPreviousAnswers);
     setCurrentLevel(getRandomLevel());
   };
 
