@@ -37,7 +37,7 @@ const useGame = (levels: Level[], highestScoreCookie: number) => {
     const newPreviousAnswers = [...previousAnswers];
 
     newPreviousAnswers.push({
-      levelId: currentLevel._id,
+      levelId: currentLevel._id as string,
       answer: currentLevel.type,
     });
 

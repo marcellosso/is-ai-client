@@ -43,7 +43,7 @@ const IndexAdmin = () => {
         </div>
         <div className="px-4 pb-2 pt-4">
           <button
-            className="block w-full p-4 text-lg text-detail rounded-full bg-slate-700 hover:bg-slate-800 focus:outline-none"
+            className="block w-full p-4 font-Kanit text-lg text-detail rounded-full bg-slate-700 hover:bg-slate-800 focus:outline-none"
             type="submit"
           >
             LOGIN

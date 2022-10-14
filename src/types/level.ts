@@ -4,7 +4,7 @@ export enum LEVEL_TYPE_ENUM {
 }
 
 export type Level = {
-  _id: string;
+  _id?: string;
   imageName: string;
   source_uri: string;
   description: string;

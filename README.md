@@ -7,11 +7,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ##### Priorities
 
 - [ ] Add summary page after game ended, show if got high score and show all questions that were answered with the source and desc
+- [ ] Add functionality to edit and delete levels on ADMIN page
 
 ## In Progress
 
 - [ ] Add google analytics
-- [ ] Add ADMIN Page
 - [ ] Handle proper development (local) and production enviromnents
 - [ ] Prepare for production release
 
@@ -35,6 +35,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [x] Add Styles
 - [x] Add info toast on layout
 - [x] Fix CORS
+- [x] Add ADMIN Page
 
 ---
 
