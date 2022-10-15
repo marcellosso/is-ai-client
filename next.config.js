@@ -3,7 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost', 'is-ai-server.herokuapp.com'],
+    domains: [
+      process.env.NEXT_IMAGE_DOMAIN_LOCALHOST,
+      process.env.NEXT_IMAGE_DOMAIN,
+    ],
   },
 };
 
