@@ -12,8 +12,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## In Progress
 
 - [ ] Add google analytics
-- [ ] Handle proper development (local) and production enviromnents
-- [ ] Prepare for production release
 
 ## Done ✓
 
@@ -36,6 +34,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [x] Add info toast on layout
 - [x] Fix CORS
 - [x] Add ADMIN Page
+- [x] Handle proper development (local) and production enviromnents
+- [x] Prepare for production release
 
 ---
 
