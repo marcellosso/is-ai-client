@@ -9,6 +9,8 @@ export type Level = {
   source_uri: string;
   description: string;
   type: LEVEL_TYPE_ENUM;
+  answered_ai: number;
+  answered_human: number;
 };
 
 export type PreviousAnswerLevel = {

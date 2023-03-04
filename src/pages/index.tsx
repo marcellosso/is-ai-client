@@ -7,14 +7,17 @@ import useGame from '../hooks/useGame';
 import Layout from '../components/layout';
 import StartGame from '../components/start-game';
 import Game from '../components/game';
+import EndGameModal from '../components/end-game-modal';
 import { getCookie } from 'cookies-next';
-
+import { useState } from 'react';
 interface IMain {
   levels: Level[];
   highestScoreCookie: number;
 }
 
 const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
+  const [openFinishGameModal, setOpenFinishGameModal] = useState(false);
+
   const {
     alert,
     setAlert,
@@ -23,11 +26,21 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
     currentScore,
     currentLevel,
     highestScoreClientState,
+    previousAnswers,
     handleAnswer,
-  } = useGame(levels, highestScoreCookie);
+    endGame,
+  } = useGame(levels, highestScoreCookie, setOpenFinishGameModal);
 
   return (
     <Layout alert={alert} setAlert={setAlert}>
+      <EndGameModal
+        currentScore={currentScore}
+        levels={levels}
+        previousAnswers={previousAnswers}
+        openFinishGameModal={openFinishGameModal}
+        setOpenFinishGameModal={setOpenFinishGameModal}
+        endGameTrigger={endGame}
+      />
       {!gameStarted ? (
         <StartGame
           highestScore={highestScoreClientState}

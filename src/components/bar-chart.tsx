@@ -1,24 +1,32 @@
 import React from 'react';
 
-const BarChart = () => {
+interface IAnswersBarChart {
+  aiPercentage: string;
+  humanPercentage: string;
+}
+
+const AnswersBarChart: React.FC<IAnswersBarChart> = ({
+  aiPercentage,
+  humanPercentage,
+}) => {
   return (
-    <div className="h-44 flex justify-center items-end">
+    <div className="overflow-hidden text-xs flex rounded w-full ml-2">
       <div
-        className="w-10 flex items-center justify-center mr-2 bg-blue-600 text-xs font-medium text-detail text-center p-0.5 leading-none rounded-md"
-        style={{ height: '55%' }}
+        style={{ width: aiPercentage }}
+        className="barChart shadow-none flex flex-col text-center whitespace-nowrap text-secondary justify-center bg-detail overflow-ellipsis"
+        data-percentage={aiPercentage}
       >
-        {' '}
-        55%
+        {aiPercentage}
       </div>
       <div
-        className="w-10 flex items-center justify-center bg-red-600 text-xs font-medium text-detail text-center p-0.5 leading-none rounded-md"
-        style={{ height: '45%' }}
+        style={{ width: humanPercentage }}
+        className="barChart shadow-none flex flex-col text-center whitespace-nowrap text-secondary justify-center bg-slate-200 overflow-ellipsis"
+        data-percentage={humanPercentage}
       >
-        {' '}
-        45%
+        {humanPercentage}
       </div>
     </div>
   );
 };
 
-export default BarChart;
+export default AnswersBarChart;
