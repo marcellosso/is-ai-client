@@ -90,8 +90,10 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           setCloseAlert={() => setShareCopied(false)}
         />
       )}
-      <h1 className="mb-5 text-6xl font-bold">You scored: {currentScore}</h1>
-      <h2 className="text-4xl font-bold">Global Answers</h2>
+      <h1 className="mb-5 text-4xl sm:text-6xl font-bold">
+        You scored: {currentScore}
+      </h1>
+      <h2 className="text-2xl sm:text-4xl font-bold">Global Answers</h2>
       <div className="w-full flex items-center justify-center">
         <div className="flex items-center">
           AI
@@ -137,20 +139,20 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           );
         })}
       </div>
-      <div className="flex">
+      <div className="flex mb-2 xs:mb-0">
         <button
           type="button"
-          className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 bg-detail text-secondary font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg hover:text-detail focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          className="w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs3:px-4 xs3:py2 xs:px-6 sm:px-8 xs:py-2 sm:py-4 bg-detail text-secondary font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg hover:text-detail focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
           onClick={handleGenerateShareMessage}
         >
-          <BsShareFill /> <span className="pr-2 ml-2">Share</span>
+          <BsShareFill /> <span className="ml-2">Share</span>
         </button>
         <button
           type="button"
-          className="ml-2 w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          className="ml-2 w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
           onClick={handleCloseFinishGameModal}
         >
-          <span className="pr-2">Continue</span>
+          <span>Continue</span>
         </button>
       </div>
     </Modal>

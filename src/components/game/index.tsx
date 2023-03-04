@@ -30,7 +30,7 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
         <div className="flex justify-between items-center mt-2">
           <button
             type="button"
-            className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             onClick={() => handleGameAnswer(LEVEL_TYPE_ENUM.HUMAN)}
           >
             <span className="pr-2">Human</span> <BsPersonFill />
@@ -40,7 +40,7 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
           </h1>
           <button
             type="button"
-            className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1  xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
             onClick={() => handleGameAnswer(LEVEL_TYPE_ENUM.AI)}
           >
             <span className="pr-2">AI</span> <AiFillRobot />
