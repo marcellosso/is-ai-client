@@ -1,18 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Preview
+
 <img src="https://user-images.githubusercontent.com/47645704/200406494-23e412cc-7a28-44c5-aed2-f6aae94dbe75.jpg" alt="Is Ai main screen" width="500"/>
 <img src="https://user-images.githubusercontent.com/47645704/200406501-f3129a3e-10d5-4aa5-9e6c-d3d976f08c13.jpg" alt="Is Ai game screen" width="500"/>
 
-
 ## Todo
-
-- [ ] Bar chart on summary
 
 ##### Priorities
 
-- [ ] Add summary page after game ended, show if got high score and show all questions that were answered with the source and desc
 - [ ] Add functionality to edit and delete levels on ADMIN page
+- [ ] Add more levels
 
 ## In Progress
 
@@ -41,6 +39,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [x] Add ADMIN Page
 - [x] Handle proper development (local) and production enviromnents
 - [x] Prepare for production release
+- [x] Bar chart on summary
+- [x] Add summary page after game ended, show if got high score and show all questions that were answered.
 
 ---
 
