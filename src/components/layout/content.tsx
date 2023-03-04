@@ -24,7 +24,7 @@ const Content: FC<IContent> = ({ alert, setAlert, children }) => {
         />
       </header>
 
-      <div className="h-full flex items-center justify-center">
+      <div className="h-4/6 flex items-center justify-center w-full sm:h-full">
         {children}
 
         <footer className="w-full flex items-center justify-center fixed left-0 bottom-0">

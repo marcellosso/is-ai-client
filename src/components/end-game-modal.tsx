@@ -1,8 +1,10 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Level, PreviousAnswerLevel } from '../types/level';
 import BarChart from './bar-chart';
+import { BsShareFill } from 'react-icons/bs';
+import AlertMessage from './alert-message';
 
 const customStyles = {
   content: {
@@ -49,9 +51,30 @@ const EndGameModal: React.FC<IEndGameModal> = ({
   endGameTrigger,
   setOpenFinishGameModal,
 }) => {
+  const [shareCopied, setShareCopied] = useState(false);
+
+  const emojiGetter = () => {
+    if (currentScore >= 20) return '😮';
+    if (currentScore >= 10) return '😎';
+    if (currentScore > 1) return '🔥';
+    if (currentScore == 1) return '🫠';
+
+    return '🥺';
+  };
+
   const handleCloseFinishGameModal = () => {
     setOpenFinishGameModal(false);
     endGameTrigger();
+  };
+
+  const handleGenerateShareMessage = () => {
+    const pointMessage = currentScore == 1 ? 'point' : 'points';
+    navigator.clipboard.writeText(
+      `Just played AI or Human!\nhttps://www.${
+        process.env.NEXT_PUBLIC_IMAGE_DOMAIN
+      }\n\nScored: ${currentScore} ${pointMessage} ${emojiGetter()}.`
+    );
+    setShareCopied(true);
   };
 
   return (
@@ -61,6 +84,12 @@ const EndGameModal: React.FC<IEndGameModal> = ({
       style={customStyles as any}
       onRequestClose={handleCloseFinishGameModal}
     >
+      {shareCopied && (
+        <AlertMessage
+          message="Copied to clipboard"
+          setCloseAlert={() => setShareCopied(false)}
+        />
+      )}
       <h1 className="mb-5 text-6xl font-bold">You scored: {currentScore}</h1>
       <h2 className="text-4xl font-bold">Global Answers</h2>
       <div className="w-full flex items-center justify-center">
@@ -108,13 +137,22 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           );
         })}
       </div>
-      <button
-        type="button"
-        className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-        onClick={handleCloseFinishGameModal}
-      >
-        <span className="pr-2">Close</span>
-      </button>
+      <div className="flex">
+        <button
+          type="button"
+          className="w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 bg-detail text-secondary font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg hover:text-detail focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          onClick={handleGenerateShareMessage}
+        >
+          <BsShareFill /> <span className="pr-2 ml-2">Share</span>
+        </button>
+        <button
+          type="button"
+          className="ml-2 w-24 xs2:w-36 sm:w-44 flex items-center justify-center xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          onClick={handleCloseFinishGameModal}
+        >
+          <span className="pr-2">Continue</span>
+        </button>
+      </div>
     </Modal>
   );
 };

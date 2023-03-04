@@ -4,8 +4,8 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
-      process.env.NEXT_IMAGE_DOMAIN_LOCALHOST || '',
-      process.env.NEXT_IMAGE_DOMAIN || '',
+      process.env.NEXT_PUBLIC_IMAGE_DOMAIN_LOCALHOST || '',
+      process.env.NEXT_PUBLIC_IMAGE_DOMAIN || '',
     ],
   },
 };

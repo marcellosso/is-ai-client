@@ -10,11 +10,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ##### Priorities
 
 - [ ] Add functionality to edit and delete levels on ADMIN page
-- [ ] Add more levels
 
 ## In Progress
 
 - [ ] Add google analytics
+- [ ] Add more levels
 
 ## Done ✓
 
