@@ -16,7 +16,7 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
     <div className="w-full md:w-1/2 lg:w-1/2 xl:w-1/3">
       <div style={{ width: '100%' }}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_URL}/images/${currentLevel.imageName}`}
+          src={`${process.env.NEXT_PUBLIC_API_URL}images/${currentLevel.imageName}`}
           alt="Level Image"
           width={700}
           height={550}
