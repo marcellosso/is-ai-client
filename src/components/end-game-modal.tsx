@@ -122,7 +122,7 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           return (
             <div key={levelId} className="w-full flex my-2">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}${level.imageName}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/images/${level.imageName}`}
                 alt="img"
                 width={50}
                 height={50}
