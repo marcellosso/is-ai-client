@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  crossOrigin: 'anonymous',
   images: {
     domains: [
       process.env.NEXT_PUBLIC_IMAGE_DOMAIN_LOCALHOST || '',
