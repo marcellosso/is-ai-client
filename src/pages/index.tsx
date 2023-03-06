@@ -1,6 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import { Level } from '../types/level';
-import { getAllLevels } from '../services/level';
 
 import useGame from '../hooks/useGame';
 
@@ -10,6 +9,7 @@ import Game from '../components/game';
 import EndGameModal from '../components/end-game-modal';
 import { getCookie } from 'cookies-next';
 import { useState } from 'react';
+import axios from 'axios';
 interface IMain {
   levels: Level[];
   highestScoreCookie: number;
@@ -58,7 +58,8 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const levels = await getAllLevels();
+  const res = await axios.get(`${ctx.req.headers.referer}/api/info/`);
+  const levels = res.data;
   const highestScore = getCookie('highestScore', ctx);
 
   return { props: { levels, highestScoreCookie: highestScore || 0 } };
