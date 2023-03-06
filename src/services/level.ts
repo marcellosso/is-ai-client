@@ -6,6 +6,17 @@ const LEVEL_ENDPOINT = 'info';
 
 const cookies = new Cookies();
 
+export const getAllLevels = async () => {
+  try {
+    const res = await api.get(`${LEVEL_ENDPOINT}/`);
+    const levels = res.data;
+
+    return levels;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const updateLevelsAnswers = async (answers: PreviousAnswerLevel[]) => {
   try {
     await api.post(`${LEVEL_ENDPOINT}/answers/`, answers);

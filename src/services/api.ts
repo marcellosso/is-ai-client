@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const api = Axios.create({
-  baseURL: '/api/',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: false,
 });
 
