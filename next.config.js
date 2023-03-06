@@ -7,6 +7,7 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_IMAGE_DOMAIN_LOCALHOST || '',
       process.env.NEXT_PUBLIC_IMAGE_DOMAIN || '',
     ],
+    minimumCacheTTL: 31536000,
   },
 };
 

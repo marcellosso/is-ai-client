@@ -5,6 +5,7 @@ import { Level, PreviousAnswerLevel } from '../types/level';
 import BarChart from './bar-chart';
 import { BsShareFill } from 'react-icons/bs';
 import AlertMessage from './alert-message';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const customStyles = {
   content: {
@@ -40,8 +41,12 @@ interface IEndGameModal {
   setOpenFinishGameModal: (_v: boolean) => void;
 }
 
-const toPercent = (numerator: number, denominator: number) =>
-  ((numerator / denominator) * 100).toFixed(2) + '%';
+const toPercent = (numerator: number, denominator: number) => {
+  let percentResult = (numerator / denominator) * 100;
+  if (isNaN(percentResult)) percentResult = 50;
+
+  return percentResult.toFixed(2) + '%';
+};
 
 const EndGameModal: React.FC<IEndGameModal> = ({
   currentScore,
@@ -67,15 +72,16 @@ const EndGameModal: React.FC<IEndGameModal> = ({
     endGameTrigger();
   };
 
-  const handleGenerateShareMessage = () => {
-    const pointMessage = currentScore == 1 ? 'point' : 'points';
-    navigator.clipboard.writeText(
+  const clipboardText = React.useMemo(
+    () =>
       `Just played AI or Human!\nhttps://www.${
         process.env.NEXT_PUBLIC_IMAGE_DOMAIN
-      }\n\nScored: ${currentScore} ${pointMessage} ${emojiGetter()}.`
-    );
-    setShareCopied(true);
-  };
+      }\n\nScored: ${currentScore} ${
+        currentScore == 1 ? 'point' : 'points'
+      } ${emojiGetter()}.`,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentScore]
+  );
 
   return (
     <Modal
@@ -122,7 +128,7 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           return (
             <div key={levelId} className="w-full flex my-2">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}images/${level.imageName}`}
+                src={level.image_uri}
                 alt="img"
                 width={50}
                 height={50}
@@ -140,13 +146,17 @@ const EndGameModal: React.FC<IEndGameModal> = ({
         })}
       </div>
       <div className="flex mb-2 xs:mb-0">
-        <button
-          type="button"
-          className="w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs3:px-4 xs3:py2 xs:px-6 sm:px-8 xs:py-2 sm:py-4 bg-detail text-secondary font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg hover:text-detail focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-          onClick={handleGenerateShareMessage}
+        <CopyToClipboard
+          text={clipboardText}
+          onCopy={() => setShareCopied(true)}
         >
-          <BsShareFill /> <span className="ml-2">Share</span>
-        </button>
+          <button
+            type="button"
+            className="w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs3:px-4 xs3:py2 xs:px-6 sm:px-8 xs:py-2 sm:py-4 bg-detail text-secondary font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg hover:text-detail focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+          >
+            <BsShareFill /> <span className="ml-2">Share</span>
+          </button>
+        </CopyToClipboard>
         <button
           type="button"
           className="ml-2 w-28 xs2:w-36 sm:w-44 flex items-center justify-center px-2 py-1 xs:px-6 sm:px-8 xs:py-2 sm:py-4 border-2 border-detail text-detail font-medium leading-tight uppercase rounded hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out"

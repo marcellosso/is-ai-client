@@ -7,8 +7,6 @@ import { LEVEL_TYPE_ENUM } from '../types/level';
 
 const MainAdmin = () => {
   const [type, setType] = useState(LEVEL_TYPE_ENUM.HUMAN);
-  const [sourceURL, setSourceURL] = useState('');
-  const [description, setDescription] = useState('');
   const [file, setFile] = useState<File>();
 
   const [error, setError] = useState('');
@@ -20,14 +18,12 @@ const MainAdmin = () => {
     e.preventDefault();
     const body = new FormData();
 
-    if (!file || !sourceURL || !type || !description) {
+    if (!file || !type) {
       setLoading(false);
       setError('Missing fields');
       return;
     }
     body.append('image', file as File);
-    body.append('description', description);
-    body.append('source_uri', sourceURL);
     body.append('type', type);
 
     const newLevel = await createLevel(body);
@@ -77,21 +73,6 @@ const MainAdmin = () => {
             </div>
           ) : (
             <>
-              <input
-                type="text"
-                id="source"
-                name="source"
-                placeholder="Source URL"
-                className="w-full p-4 my-2 rounded-lg bg-slate-900 text-detail placeholder-detail focus:outline-none"
-                onChange={(e) => setSourceURL(e.target.value)}
-              />
-              <textarea
-                id="description"
-                name="description"
-                placeholder="Description"
-                className="w-full p-4 rounded-lg bg-slate-900 text-detail placeholder-detail focus:outline-none"
-                onChange={(e) => setDescription(e.target.value)}
-              />
               <select
                 className="
               form-select 
