@@ -74,8 +74,8 @@ const EndGameModal: React.FC<IEndGameModal> = ({
 
   const clipboardText = React.useMemo(
     () =>
-      `Just played AI or Human!\nhttps://www.${
-        process.env.NEXT_PUBLIC_IMAGE_DOMAIN
+      `Just played AI or Human!\n${
+        window.location.href
       }\n\nScored: ${currentScore} ${
         currentScore == 1 ? 'point' : 'points'
       } ${emojiGetter()}.`,
