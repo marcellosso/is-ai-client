@@ -69,12 +69,12 @@ const EndGameModal: React.FC<IEndGameModal> = ({
   const clipboardText = React.useMemo(
     () =>
       `Just played AI or Human!\n${
-        window?.location?.href
+        process.env.NEXT_PUBLIC_SITE_URL
       }\n\nScored: ${currentScore} ${
         currentScore == 1 ? 'point' : 'points'
       } ${emojiGetter()}.`,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentScore, window?.location?.href]
+    [currentScore]
   );
 
   return (
