@@ -1,13 +1,23 @@
-import { GetServerSideProps } from 'next';
+import Image from 'next/image';
+import { GetServerSideProps, NextPage } from 'next';
 import React, { useState } from 'react';
 import Layout from '../components/layout';
 import { handleAuthSSR, logout } from '../helpers/auth';
-import { createLevel } from '../services/level';
-import { LEVEL_TYPE_ENUM } from '../types/level';
+import { createBulkLevels, getAllLevels } from '../services/level';
+import { Level, LEVEL_TYPE_ENUM } from '../types/level';
+import { getLevelAnswerPercentage } from '../helpers/game';
+import AnswersBarChart from '../components/bar-chart';
 
-const MainAdmin = () => {
+import { BsPersonFill } from 'react-icons/bs';
+import { AiFillRobot } from 'react-icons/ai';
+
+interface IMainAdmin {
+  levels: Level[];
+}
+
+const MainAdmin: NextPage<IMainAdmin> = ({ levels }) => {
   const [type, setType] = useState(LEVEL_TYPE_ENUM.HUMAN);
-  const [file, setFile] = useState<File>();
+  const [files, setFiles] = useState<FileList>();
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,23 +27,25 @@ const MainAdmin = () => {
     setError('');
     e.preventDefault();
     const body = new FormData();
-
-    if (!file || !type) {
+    if (!files || !type) {
       setLoading(false);
       setError('Missing fields');
       return;
     }
-    body.append('image', file as File);
+
+    Array.from(files).forEach((file) => {
+      body.append('images', file);
+    });
+
     body.append('type', type);
 
-    const newLevel = await createLevel(body);
+    await createBulkLevels(body);
     setLoading(false);
-    console.log(newLevel);
   };
 
   return (
     <Layout>
-      <div className="h-full w-96">
+      <div className="h-full w-full flex flex-col items-center">
         <header className="flex flex-col items-center">
           <h1 className="text-3xl text-detail font-Kanit">Admin Menu</h1>
           <button
@@ -44,8 +56,8 @@ const MainAdmin = () => {
           </button>
         </header>
 
-        <section className="flex flex-col">
-          <h1 className="text-2xl text-detail font-Kanit">New Level</h1>
+        <section className="flex flex-col w-96">
+          <h1 className="text-2xl text-detail font-Kanit">Create Levels</h1>
           {error && <h3 className="text-sm text-red-400 font-bold">{error}</h3>}
 
           {loading ? (
@@ -107,18 +119,69 @@ const MainAdmin = () => {
                 className="block w-full text-sm text-detail font-Kanit file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-900 file:text-detail hover:file:bg-slate-700 hover:file:cursor-pointer"
                 type="file"
                 name="myImage"
+                multiple
                 accept=".jpg,.jpeg,.png"
-                onChange={(e) => setFile((e.target.files as FileList)[0])}
+                onChange={(e) => setFiles(e.target.files as FileList)}
               />
 
               <button
                 className="font-Kanit w-full p-1 mt-2 text-md text-detail rounded-lg bg-slate-900 hover:bg-slate-800 focus:outline-none"
                 onClick={handleLevelCreate}
               >
-                Create Level
+                Create
               </button>
             </>
           )}
+        </section>
+        <section className="mt-3 w-1/2 h-full mb-5 overflow-y-scroll scrollbar-hide">
+          <h1 className="text-3xl text-detail font-Kanit text-center">
+            Levels
+          </h1>
+          <div className="w-full flex items-center justify-center">
+            <div className="flex items-center">
+              AI
+              <div className="w-5 h-5 bg-detail ml-2"></div>
+            </div>
+            <div className="flex items-center ml-3 text-slate-200">
+              HUMAN
+              <div className="w-5 h-5 bg-slate-200 ml-2"></div>
+            </div>
+          </div>
+          {levels.map((level) => {
+            const { percentageAnsweredAi, percentageAnsweredHuman } =
+              getLevelAnswerPercentage(level);
+
+            return (
+              <div key={level._id} className="flex mt-2 w-full">
+                {level.type == LEVEL_TYPE_ENUM.AI ? (
+                  <AiFillRobot
+                    className="text-detail text-center self-center"
+                    size={60}
+                  />
+                ) : (
+                  <BsPersonFill
+                    className="text-slate-200 text-center self-center"
+                    size={60}
+                  />
+                )}
+                <Image
+                  src={level.image_uri}
+                  alt="img"
+                  width={100}
+                  height={100}
+                  quality={100}
+                  objectFit="cover"
+                  objectPosition="50% 20%"
+                  className="rounded shadow-2xl"
+                />
+
+                <AnswersBarChart
+                  aiPercentage={percentageAnsweredAi}
+                  humanPercentage={percentageAnsweredHuman}
+                />
+              </div>
+            );
+          })}
         </section>
       </div>
     </Layout>
@@ -126,7 +189,8 @@ const MainAdmin = () => {
 };
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   await handleAuthSSR(ctx);
+  const levels = await getAllLevels();
 
-  return { props: {} };
+  return { props: { levels } };
 };
 export default MainAdmin;

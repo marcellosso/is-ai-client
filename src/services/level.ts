@@ -41,3 +41,18 @@ export const createLevel = async (data: FormData) => {
     console.log(err);
   }
 };
+
+export const createBulkLevels = async (data: FormData) => {
+  try {
+    const token = cookies.get('authtoken');
+
+    await api.post(`${LEVEL_ENDPOINT}/bulk`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

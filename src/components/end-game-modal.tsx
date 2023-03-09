@@ -6,6 +6,7 @@ import BarChart from './bar-chart';
 import { BsShareFill } from 'react-icons/bs';
 import AlertMessage from './alert-message';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { getLevelAnswerPercentage } from '../helpers/game';
 
 const customStyles = {
   content: {
@@ -41,13 +42,6 @@ interface IEndGameModal {
   setOpenFinishGameModal: (_v: boolean) => void;
 }
 
-const toPercent = (numerator: number, denominator: number) => {
-  let percentResult = (numerator / denominator) * 100;
-  if (isNaN(percentResult)) percentResult = 50;
-
-  return percentResult.toFixed(2) + '%';
-};
-
 const EndGameModal: React.FC<IEndGameModal> = ({
   currentScore,
   levels,
@@ -75,12 +69,12 @@ const EndGameModal: React.FC<IEndGameModal> = ({
   const clipboardText = React.useMemo(
     () =>
       `Just played AI or Human!\n${
-        window.location.href
+        window?.location?.href
       }\n\nScored: ${currentScore} ${
         currentScore == 1 ? 'point' : 'points'
       } ${emojiGetter()}.`,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentScore]
+    [currentScore, window?.location?.href]
   );
 
   return (
@@ -115,15 +109,8 @@ const EndGameModal: React.FC<IEndGameModal> = ({
           const levelId = answer.levelId;
           const level = levels.find((level) => level._id == levelId) as Level;
 
-          const totalAmountOfAnswers = level.answered_ai + level.answered_human;
-          const percentageAnsweredAi = toPercent(
-            level.answered_ai,
-            totalAmountOfAnswers
-          );
-          const percentageAnsweredHuman = toPercent(
-            level.answered_human,
-            totalAmountOfAnswers
-          );
+          const { percentageAnsweredAi, percentageAnsweredHuman } =
+            getLevelAnswerPercentage(level);
 
           return (
             <div key={levelId} className="w-full flex my-2">
