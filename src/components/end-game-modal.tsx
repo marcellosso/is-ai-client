@@ -68,7 +68,7 @@ const EndGameModal: React.FC<IEndGameModal> = ({
 
   const clipboardText = React.useMemo(
     () =>
-      `Just played AI or Human!\n${
+      `Just played AI or Human!\nhttps://${
         process.env.NEXT_PUBLIC_SITE_URL
       }\n\nScored: ${currentScore} ${
         currentScore == 1 ? 'point' : 'points'
