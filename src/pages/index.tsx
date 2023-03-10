@@ -70,6 +70,7 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
               quality={100}
               width={400}
               height={200}
+              priority
             />
 
             <ReactLoading type="spinningBubbles" color="rgb(255 211 105)" />
