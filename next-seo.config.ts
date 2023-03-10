@@ -1,9 +1,10 @@
 import { DefaultSeoProps } from 'next-seo';
 
 const config: DefaultSeoProps = {
-  title: 'AI or Human',
+  title:
+    'AI or Human: A game to test your abilities to determine wether the image was created by an Artifical Inteligence or by a Human.',
   description:
-    'AI or Human is a game where the player has to choose wether the provided image was created by an AI or by a Human.',
+    'AI or Human is a game where the player has to choose wether the provided image was created by an Artifical Inteligence or by a Human.',
   openGraph: {
     type: 'website',
     locale: 'en_IE',

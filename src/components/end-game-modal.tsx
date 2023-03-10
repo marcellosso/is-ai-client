@@ -116,7 +116,7 @@ const EndGameModal: React.FC<IEndGameModal> = ({
             <div key={levelId} className="w-full flex my-2">
               <Image
                 src={level.image_uri}
-                alt="img"
+                alt="Level Image"
                 width={50}
                 height={50}
                 quality={100}
