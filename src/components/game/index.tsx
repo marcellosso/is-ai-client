@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Level, LEVEL_TYPE_ENUM } from '../../types/level';
 
 import { BsPersonFill } from 'react-icons/bs';
 import { AiFillRobot } from 'react-icons/ai';
+import FullscreenImageModal from '../fullscreen-image-modal';
 
 interface IGame {
   currentLevel: Level;
@@ -12,8 +13,16 @@ interface IGame {
 }
 
 const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
+  const [openFullscreenImageModal, setOpenFullscreenImageModal] =
+    useState(false);
+
   return (
     <div className="w-full md:w-1/2 lg:w-1/2 xl:w-1/3">
+      <FullscreenImageModal
+        imageName={currentLevel.image_name}
+        openFullscreenImageModal={openFullscreenImageModal}
+        setOpenFullscreenImageModal={setOpenFullscreenImageModal}
+      />
       <div style={{ width: '100%' }}>
         <Image
           src={`/assets/${currentLevel.image_name}`}
@@ -23,8 +32,9 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
           quality={100}
           objectFit="cover"
           objectPosition="50% 20%"
-          className="rounded shadow-2xl"
+          className="rounded shadow-2xl cursor-pointer"
           layout="responsive"
+          onClick={() => setOpenFullscreenImageModal(true)}
         />
 
         <div className="flex justify-between items-center mt-2">
