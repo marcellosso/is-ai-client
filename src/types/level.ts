@@ -5,7 +5,7 @@ export enum LEVEL_TYPE_ENUM {
 
 export type Level = {
   _id?: string;
-  image_uri: string;
+  image_name: string;
   type: LEVEL_TYPE_ENUM;
   answered_ai: number;
   answered_human: number;

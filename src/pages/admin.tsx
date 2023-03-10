@@ -165,7 +165,7 @@ const MainAdmin: NextPage<IMainAdmin> = ({ levels }) => {
                   />
                 )}
                 <Image
-                  src={level.image_uri}
+                  src={`/assets/${level.image_name}`}
                   alt="Level Image"
                   width={100}
                   height={100}
