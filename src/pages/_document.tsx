@@ -27,11 +27,11 @@ export default function Document() {
         <meta name="theme-color" content="#ffffff" />
         <meta
           property="og:image"
-          content="https://aiorhumangame.com/_next/image?url=%2Fassets%2Fai-or-human-logo.png&w=828&q=100"
+          content="https://aiorhumangame.com/assets/ai-or-human-logo-updated.png"
         />
         <meta
           name="twitter:image"
-          content="https://aiorhumangame.com/_next/image?url=%2Fassets%2Fai-or-human-logo.png&w=828&q=100"
+          content="https://aiorhumangame.com/assets/ai-or-human-logo-updated.png"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;700&display=swap"

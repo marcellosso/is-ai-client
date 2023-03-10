@@ -49,3 +49,28 @@
     width: attr(data-percentage);
   }
 }
+
+.editExpandIcon > span:nth-child(1) {
+  position: fixed !important;
+  width: 300px !important;
+  margin-left: -10vw !important;
+  z-index: 10 !important;
+}
+
+@media (max-width: 1280px) {
+  .editExpandIcon > span:nth-child(1) {
+    margin-left: -15vw !important;
+  }
+}
+
+@media (max-width: 960px) {
+  .editExpandIcon > span:nth-child(1) {
+    margin-left: -20vw !important;
+  }
+}
+
+@media (max-width: 770px) {
+  .editExpandIcon > span:nth-child(1) {
+    display: none;
+  }
+}

@@ -16,7 +16,7 @@ const Content: FC<IContent> = ({ alert, setAlert, children }) => {
 
       <header className="flex items-center justify-center w-full">
         <Image
-          src="/assets/ai-or-human-logo.png"
+          src="/assets/ai-or-human-logo-updated.png"
           alt="AI or HUMAN Logo with an icon of a robot and a human"
           quality={100}
           width={400}

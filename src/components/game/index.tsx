@@ -23,7 +23,16 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
         openFullscreenImageModal={openFullscreenImageModal}
         setOpenFullscreenImageModal={setOpenFullscreenImageModal}
       />
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%' }} className="editExpandIcon">
+        <Image
+          src={'/click-to-expand-yellow.png'}
+          alt="Click on the Image to Expand"
+          height={20}
+          width={20}
+          quality={100}
+          layout="responsive"
+          className="opacity-50"
+        />
         <Image
           src={`/assets/${currentLevel.image_name}`}
           alt="Level Image"

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { GetServerSideProps, NextPage } from 'next';
 import { Level } from '../types/level';
+import ReactLoading from 'react-loading';
 
 import useGame from '../hooks/useGame';
 
@@ -8,22 +9,18 @@ import Layout from '../components/layout';
 import StartGame from '../components/start-game';
 import Game from '../components/game';
 import EndGameModal from '../components/end-game-modal';
-import { getCookie, setCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import { useState } from 'react';
 import { getAllLevels } from '../services/level';
 interface IMain {
   levels: Level[];
   highestScoreCookie: number;
-  hasPreloaded: boolean;
 }
 
-const Main: NextPage<IMain> = ({
-  levels,
-  highestScoreCookie,
-  hasPreloaded,
-}) => {
+const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
   const [openFinishGameModal, setOpenFinishGameModal] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+  console.log(loading);
   const {
     alert,
     setAlert,
@@ -38,13 +35,9 @@ const Main: NextPage<IMain> = ({
   } = useGame(levels, highestScoreCookie, setOpenFinishGameModal);
 
   const preloadImages = () => {
-    if (hasPreloaded) return <></>;
-
-    setCookie('hasPreloaded', true);
-
     return (
       <>
-        {levels.map((level) => (
+        {levels.map((level, idx) => (
           <div key={level._id}>
             <Image
               src={`/assets/${level.image_name}`}
@@ -56,6 +49,9 @@ const Main: NextPage<IMain> = ({
               objectPosition="50% 20%"
               className="rounded shadow-2xl"
               layout="responsive"
+              onLoadingComplete={() =>
+                idx + 1 == levels.length ? setLoading(false) : null
+              }
             />
           </div>
         ))}
@@ -63,9 +59,33 @@ const Main: NextPage<IMain> = ({
     );
   };
 
+  if (loading)
+    return (
+      <>
+        <div className="bg-secondary flex-col w-screen h-screen flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
+            <Image
+              src="/assets/ai-or-human-logo-updated.png"
+              alt="AI or HUMAN Logo with an icon of a robot and a human"
+              quality={100}
+              width={400}
+              height={200}
+            />
+
+            <ReactLoading type="spinningBubbles" color="rgb(255 211 105)" />
+          </div>
+          <p className="text-slate-200 text-xs fixed bottom-1">
+            When opening the first time, loading might take longer.
+          </p>
+          <div className="fixed overflow-scroll overflow-x-hidden">
+            {preloadImages()}
+          </div>
+        </div>
+      </>
+    );
+
   return (
     <Layout alert={alert} setAlert={setAlert}>
-      {preloadImages()}
       <EndGameModal
         currentScore={currentScore}
         levels={levels}
@@ -93,13 +113,11 @@ const Main: NextPage<IMain> = ({
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const levels = await getAllLevels();
   const highestScore = getCookie('highestScore', ctx);
-  const hasPreloaded = getCookie('hasPreloaded', ctx);
 
   return {
     props: {
       levels,
       highestScoreCookie: highestScore || 0,
-      hasPreloaded: hasPreloaded || false,
     },
   };
 };
