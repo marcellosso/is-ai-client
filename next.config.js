@@ -13,8 +13,8 @@ const nextConfig = {
   redirects: async () => [
     {
       source: '/:path*',
-      has: [{ type: 'host', value: `www.${NEXT_PUBLIC_SITE_URL}` }],
-      destination: `https://${NEXT_PUBLIC_SITE_URL}/:path*`,
+      has: [{ type: 'host', value: `www.aiorhumangame.com` }],
+      destination: `https://aiorhumangame.com/:path*`,
       permanent: true,
     },
   ],
