@@ -20,7 +20,7 @@ interface IMain {
 const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
   const [openFinishGameModal, setOpenFinishGameModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log(loading);
+
   const {
     alert,
     setAlert,

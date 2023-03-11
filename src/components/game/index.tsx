@@ -32,6 +32,7 @@ const Game: FC<IGame> = ({ currentLevel, currentScore, handleGameAnswer }) => {
           quality={100}
           layout="responsive"
           className="opacity-50"
+          onClick={() => setOpenFullscreenImageModal(true)}
           priority
         />
         <Image
