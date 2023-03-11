@@ -25,7 +25,7 @@ const customStyles = {
     justifyContent: 'space-between',
     padding: '2vw',
     borderRadius: '1.5rem',
-    maxHeight: '50vh',
+    maxHeight: '65vh',
   },
   overlay: {
     zIndex: 100,
