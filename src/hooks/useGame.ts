@@ -4,8 +4,6 @@ import { updateLevelsAnswers } from '../services/level';
 import { Alert } from '../types/alert';
 import { Level, LEVEL_TYPE_ENUM, PreviousAnswerLevel } from '../types/level';
 
-const LIMIT_LEVEL_AMOUNT = process.env.NEXT_PUBLIC_LIMIT_LEVEL_AMOUNT || 5;
-
 const useGame = (
   levels: Level[],
   highestScoreCookie: number,
@@ -23,10 +21,13 @@ const useGame = (
     useState(highestScoreCookie);
 
   const getRandomLevel = (prevAnswers: PreviousAnswerLevel[] = []) => {
-    const excludedLevels = prevAnswers.slice(-LIMIT_LEVEL_AMOUNT);
     const possibleLevels = levels.filter(
-      (level) => !excludedLevels.some((el) => el.levelId == level._id)
+      (level) => !prevAnswers.some((el) => el.levelId == level._id)
     );
+
+    if (possibleLevels.length == 0) {
+      return levels[Math.round(Math.random() * (levels.length - 1))];
+    }
 
     return possibleLevels[
       Math.round(Math.random() * (possibleLevels.length - 1))
