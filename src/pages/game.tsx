@@ -9,16 +9,21 @@ import EndGameModal from '../components/end-game-modal';
 import { getCookie } from 'cookies-next';
 import { useState } from 'react';
 import { getAllLevels } from '../services/level';
+import { useRouter } from 'next/router';
 interface IMain {
   levels: Level[];
   highestScoreCookie: number;
 }
 
 const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
+  const router = useRouter();
   const [openFinishGameModal, setOpenFinishGameModal] = useState(false);
 
-  const { currentScore, currentLevel, previousAnswers, handleAnswer, endGame } =
-    useGame(levels, highestScoreCookie, setOpenFinishGameModal);
+  const { currentScore, currentLevel, previousAnswers, handleAnswer } = useGame(
+    levels,
+    highestScoreCookie,
+    setOpenFinishGameModal
+  );
 
   return (
     <Layout>
@@ -28,7 +33,7 @@ const Main: NextPage<IMain> = ({ levels, highestScoreCookie }) => {
         previousAnswers={previousAnswers}
         openFinishGameModal={openFinishGameModal}
         setOpenFinishGameModal={setOpenFinishGameModal}
-        endGameTrigger={endGame}
+        endGameTrigger={() => router.push('/')}
       />
       <Game
         currentScore={currentScore}
