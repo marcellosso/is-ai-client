@@ -1,7 +1,7 @@
 import { setCookie } from 'cookies-next';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { updateLevelsAnswers } from '../services/level';
-import { Alert } from '../types/alert';
 import { Level, LEVEL_TYPE_ENUM, PreviousAnswerLevel } from '../types/level';
 
 const useGame = (
@@ -9,9 +9,9 @@ const useGame = (
   highestScoreCookie: number,
   setFinishedGameModal: (_v: boolean) => void
 ) => {
-  const [gameStarted, setGameStarted] = useState(false);
+  const router = useRouter();
+
   const [currentScore, setCurrentScore] = useState(0);
-  const [alert, setAlert] = useState<Alert>({});
 
   const [previousAnswers, setPreviousAnswers] = useState<PreviousAnswerLevel[]>(
     []
@@ -41,6 +41,18 @@ const useGame = (
     setCurrentLevel(getRandomLevel(localPreviousAnswers));
   };
 
+  useEffect(() => {
+    router.events.on('routeChangeComplete', (url) => {
+      if (url === '/') {
+        if (currentScore > highestScoreCookie) updateHighScore();
+        setCurrentScore(0);
+
+        updateAnswers(previousAnswers);
+        setCurrentLevel(getRandomLevel());
+      }
+    });
+  }, [router.events]);
+
   const updateHighScore = () => {
     setCookie('highestScore', currentScore);
     setHighestScoreClientState(currentScore);
@@ -49,15 +61,6 @@ const useGame = (
   const updateAnswers = (newPrevAnswers: PreviousAnswerLevel[]) => {
     setPreviousAnswers([]);
     updateLevelsAnswers(newPrevAnswers);
-  };
-
-  const endGame = () => {
-    if (currentScore > highestScoreCookie) updateHighScore();
-    setCurrentScore(0);
-    setGameStarted(false);
-
-    updateAnswers(previousAnswers);
-    setCurrentLevel(getRandomLevel());
   };
 
   const handleAnswer = (choosenLevelType: LEVEL_TYPE_ENUM) => {
@@ -85,17 +88,12 @@ const useGame = (
   };
 
   return {
-    alert,
-    setAlert,
-    gameStarted,
-    setGameStarted,
     currentScore,
     setCurrentScore,
     currentLevel,
     previousAnswers,
     highestScoreClientState,
     handleAnswer,
-    endGame,
   };
 };
 
